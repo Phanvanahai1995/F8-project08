@@ -1225,12 +1225,13 @@ html {
   --top-act-btn-separate: #ededf6;
   --dropdown-bg-color: #fff;
   --dropdown-shadow-color: rgba(200, 200, 200, 0.4);
-  --top-menu-separate-color: #d2d1d6;
+  --top-menu-border-color: #d2d1d6;
   --top-menu-link-hover-color: #0071dc;
 }
 @media (max-width: 991.98px) {
   html {
     --header-bg-color: #fff;
+    --header-shadow-color: rgba(237, 237, 246, 0.2);
   }
 }
 @media (max-width: 767.98px) {
@@ -1253,6 +1254,14 @@ html.dark {
   --dropdown-arrow-color: brightness(0) saturate(100%) invert(31%) sepia(26%)
     saturate(384%) hue-rotate(181deg) brightness(93%) contrast(89%);
   --top-menu-separate-color: #171c28;
+  --menu-column-icon-color: brightness(0) saturate(100%) invert(100%) sepia(47%)
+    saturate(2769%) hue-rotate(180deg) brightness(111%) contrast(96%);
+}
+@media (max-width: 991.98px) {
+  html.dark {
+    --header-bg-color: #fff;
+    --header-shadow-color: rgba(0, 0, 0, 0.2);
+  }
 }
 
 .top-act__btn, .top-act__group, .top-act, .navbar__link, .navbar__list, .top-bar {
@@ -1267,6 +1276,7 @@ html.dark {
 @media (max-width: 991.98px) {
   .header {
     padding: 24px 0;
+    box-shadow: 0px 20px 60px 10px var(--header-shadow-color);
   }
 }
 @media (max-width: 575.98px) {
@@ -1293,23 +1303,17 @@ html.dark {
 }
 
 .navbar {
-  margin-left: 144px;
+  margin-left: 129px;
 }
 @media (max-width: 1199.98px) {
   .navbar {
-    margin-left: 30px;
+    margin-left: 20px;
   }
 }
 @media (max-width: 991.98px) {
   .navbar {
     display: none;
   }
-}
-.navbar__item:first-child a {
-  padding-left: 0;
-}
-.navbar__item:last-child a {
-  padding-right: 0;
 }
 .navbar__item:hover .dropdown {
   display: block;
@@ -1417,22 +1421,17 @@ html.dark {
   }
 }
 
-.navbar__item:not(.navbar__item:first-child) .top-menu .top-menu__main {
-  border-right: 0;
-}
-
 .dropdown {
   position: absolute;
   left: 0;
   width: min(1240px, 100%);
-  padding-top: 50px;
-  display: none;
+  padding-top: 54px;
+  display: block;
 }
 .dropdown__inner {
-  display: flex;
+  --inner-padding: 30px;
   position: relative;
-  height: min(582px, 100vh - 134px);
-  padding: 30px;
+  padding: var(--inner-padding);
   border-radius: 20px;
   background: var(--dropdown-bg-color);
   box-shadow: 0px 40px 90px 20px var(--dropdown-shadow-color);
@@ -1447,27 +1446,25 @@ html.dark {
 }
 
 .top-menu {
-  height: 100%;
-}
-.top-menu:first-child .top-menu__main {
-  width: 292px;
+  --main-column-width: 292px;
+  --max-inner-height: calc(
+    min(582px, 100vh - 158px) - var(--inner-padding) * 2
+  );
+  position: relative;
 }
 .top-menu__main {
-  width: 262px;
-  height: 100%;
-  border-right: 1px solid var(--top-menu-separate-color);
-}
-.top-menu:not(.top-menu:first-child) .top-menu__main {
-  margin-left: 30px;
-  border-right: 0;
+  width: var(--main-column-width);
+  height: var(--max-inner-height);
+  border-right: 1px solid var(--top-menu-border-color);
+  overflow-y: auto;
 }
 
 .menu-column {
   display: flex;
   gap: 14px;
 }
-.menu-column__second {
-  margin-top: 16px;
+.menu-column + .menu-column {
+  margin-top: 22px;
 }
 .menu-column__icon {
   position: relative;
@@ -1487,27 +1484,45 @@ html.dark {
   width: 24px;
   height: 24px;
   object-fit: cover;
+  filter: var(--menu-column-icon-color);
 }
 .menu-column__content {
   flex: 1;
 }
 .menu-column__heading {
-  padding: 6px 0;
-  margin-bottom: 20px;
+  margin-top: 4px;
   font-size: 1.6rem;
   font-weight: 500;
   line-height: 150%;
 }
+.menu-column__list {
+  margin-top: 19px;
+}
+.menu-column__item:hover .sub-menu {
+  display: grid;
+}
+.menu-column__item:hover > .menu-column__link {
+  color: #0071dc;
+  font-weight: 500;
+}
 .menu-column__link {
   display: block;
-  margin-bottom: 14px;
+  padding: 7px 0;
   font-size: 1.4rem;
-  font-weight: 400;
   line-height: 142.857%;
 }
 .menu-column__link:hover {
-  color: var(--top-menu-link-hover-color);
+  color: #0071dc;
   font-weight: 500;
+}
+
+.sub-menu {
+  position: absolute;
+  display: none;
+  grid-template-columns: repeat(3, 1fr);
+  inset: 0 0 0 var(--main-column-width);
+  padding-left: var(--inner-padding);
+  overflow-y: auto;
 }
 
 /*# sourceMappingURL=main.css.map */

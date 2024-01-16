@@ -13,6 +13,7 @@ html {
 
   @include abstracts.breakpoint(lg) {
     --header-bg-color: #fff;
+    --header-shadow-color: rgba(237, 237, 246, 0.2);
   }
   @include abstracts.breakpoint(md) {
     --header-bg-color: #fff;
@@ -25,7 +26,7 @@ html {
 
   // Top-menu
 
-  --top-menu-separate-color: #d2d1d6;
+  --top-menu-border-color: #d2d1d6;
 
   --top-menu-link-hover-color: #0071dc;
 }
