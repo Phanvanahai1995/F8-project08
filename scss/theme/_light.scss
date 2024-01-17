@@ -11,11 +11,13 @@ html {
   --top-act-group-shadow: rgba(237, 237, 246, 0.2);
   --top-act-btn-separate: #ededf6;
 
-  @include abstracts.breakpoint(lg) {
+  @include abstracts.screen(lg) {
     --header-bg-color: #fff;
     --header-shadow-color: rgba(237, 237, 246, 0.2);
+    --navbar-bg-color: #fff;
   }
-  @include abstracts.breakpoint(md) {
+
+  @include abstracts.screen(md) {
     --header-bg-color: #fff;
   }
 
@@ -29,4 +31,36 @@ html {
   --top-menu-border-color: #d2d1d6;
 
   --top-menu-link-hover-color: #0071dc;
+
+  // Navbar
+  --box-shadow-color: rgba(200, 200, 200, 0.4);
+
+  // Home category
+
+  --cate-item-bg: #eee;
+  --cate-item-thum-bg-color: #fff;
+  --cate-item-title-color: #000;
+  --cate-item-desc-color: #1a162e;
+
+  @include abstracts.screen(md) {
+    --cate-item-bg: #fff;
+  }
+
+  // Filter btn
+  --filter-btn-bg-color: #fff;
+  --filter-btn-color: #6c6c72;
+
+  // Product-card
+  --product-card-bg: #fff;
+  --product-card-shadow: rgba(237, 237, 246, 0.2);
+
+  // Like btn
+  --like-btn-bg: #fff;
+
+  // Filter form
+
+  --filter-form-bg: #fff;
+  --filter-form-shadow: rgba(200, 200, 200, 0.4);
+  --slider-form-bg: #fff;
+  --filter-form-tag-bg: #9e9da8;
 }

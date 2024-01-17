@@ -1,10 +1,18 @@
+@use "../abstracts";
+
 .dropdown {
   position: absolute;
   left: 0;
 
   width: min(1240px, 100%);
   padding-top: 54px;
-  display: block;
+  display: none;
+
+  @include abstracts.screen(lg) {
+    display: none;
+    position: initial;
+    padding-top: 0;
+  }
 
   &__inner {
     --inner-padding: 30px;
@@ -25,6 +33,21 @@
       translate: -50%;
       filter: var(--dropdown-arrow-color);
     }
+
+    @include abstracts.screen(lg) {
+      padding: 0 40px;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+
+      &::before {
+        content: none;
+      }
+    }
+
+    @include abstracts.screen(md) {
+      padding: 0 20px;
+    }
   }
 }
 
@@ -41,12 +64,22 @@
     height: var(--max-inner-height);
     border-right: 1px solid var(--top-menu-border-color);
     overflow-y: auto;
+
+    @include abstracts.screen(lg) {
+      width: 100%;
+      height: auto;
+      border-right: none;
+    }
   }
 }
 
 .menu-column {
   display: flex;
   gap: 14px;
+
+  @include abstracts.screen(lg) {
+    margin-top: 10px;
+  }
 
   + .menu-column {
     margin-top: 22px;
@@ -84,19 +117,27 @@
     font-size: 1.6rem;
     font-weight: 500;
     line-height: 150%;
+
+    @include abstracts.screen(lg) {
+      margin-bottom: 26px;
+    }
   }
 
   &__list {
     margin-top: 19px;
+
+    @include abstracts.screen(lg) {
+      margin-top: 0;
+    }
   }
 
   &__item {
-    &:hover .sub-menu {
+    &--active .sub-menu {
       display: grid;
     }
   }
 
-  &__item:hover > &__link {
+  &__item--active > &__link {
     color: #0071dc;
     font-weight: 500;
   }
@@ -121,4 +162,24 @@
   inset: 0 0 0 var(--main-column-width);
   padding-left: var(--inner-padding);
   overflow-y: auto;
+
+  @include abstracts.screen(lg) {
+    position: initial;
+    grid-template-columns: repeat(1, 1fr);
+    padding-left: 0;
+  }
+
+  &--not-main {
+    position: initial;
+    inset: initial;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    height: var(--max-inner-height);
+    padding-left: 0;
+
+    @include abstracts.screen(lg) {
+      grid-template-columns: 1fr;
+      height: auto;
+    }
+  }
 }
